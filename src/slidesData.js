@@ -222,6 +222,42 @@ export const slides = [
     },
     {
         id: 12,
+        type: 'pricing',
+        title: "GROWTH PARTNERSHIP FEES",
+        subtitle: "INVESTMENT",
+        price: "₹2,10,000",
+        priceSuffix: "+ GST",
+        features: [
+            "Full System Setup",
+            "All Integrations & Migrations",
+            "No AMC (Annual Maintenance)",
+            "No Yearly Renewals",
+            "24/7 VIP support line",
+            "Priority Access: Gymrupt Growth Summit"
+        ],
+        icon: CreditCard
+    },
+    {
+        id: 13,
+        type: 'guarantee',
+        title: "THE GYMRUPT GUARANTEE",
+        subtitle: "RISK-FREE PARTNERSHIP",
+        rules: [
+            {
+                title: "Rule 1: Recovery First",
+                amount: "₹2,10,000",
+                desc: "Recovered via memberships, PT, or challenges before we discuss further costs."
+            },
+            {
+                title: "Rule 2: Monthly Asset",
+                amount: "3X ROI",
+                desc: "No recurring fees until you make 3x PowerUp cost or ₹75k-₹1L extra monthly revenue."
+            }
+        ],
+        icon: ShieldCheck
+    },
+    {
+        id: 14,
         type: 'powerups',
         title: "SCALING POWER-UPS",
         subtitle: "OPTIONAL ADD-ONS",
@@ -245,49 +281,20 @@ export const slides = [
         icon: Rocket
     },
     {
-        id: 13,
-        type: 'guarantee',
-        title: "THE GYMRUPT GUARANTEE",
-        subtitle: "RISK-FREE PARTNERSHIP",
-        rules: [
-            {
-                title: "Rule 1: Recovery First",
-                amount: "₹2,10,000",
-                desc: "Recovered via memberships, PT, or challenges before we discuss further costs."
-            },
-            {
-                title: "Rule 2: Monthly Asset",
-                amount: "3X ROI",
-                desc: "No recurring fees until you make 3x PowerUp cost or ₹75k-₹1L extra monthly revenue."
-            }
-        ],
-        icon: ShieldCheck
-    },
-    {
-        id: 14,
-        type: 'pricing',
-        title: "GROWTH PARTNERSHIP FEES",
-        subtitle: "INVESTMENT",
-        price: "₹2,10,000",
-        priceSuffix: "+ GST",
-        features: [
-            "Full System Setup",
-            "All Integrations & Migrations",
-            "No AMC (Annual Maintenance)",
-            "No Yearly Renewals",
-            "24/7 VIP support line",
-            "Franchise License: Per Location Basis"
-        ],
-        addons: [
-            { title: "Meta Ads Management", price: "₹25,000 - ₹40,000 / mo", desc: "Complete 'Done-For-You' ad strategy, creative & optimization.", icon: Megaphone },
+        id: 15,
+        type: 'addons',
+        title: "OPTIONAL UPGRADES",
+        subtitle: "SCALE FASTER",
+        items: [
+            { title: "Meta Ads Management", price: "₹25k - ₹40k / mo", desc: "Complete 'Done-For-You' ad strategy, creative & optimization.", icon: Megaphone },
             { title: "Speed-to-Lead Service", price: "Custom Quote", desc: "Dedicated team to call leads within 5 minutes.", icon: PhoneCall },
             { title: "Custom App Build", price: "Custom Quote", desc: "Fully branded iOS & Android app for your gym.", icon: Smartphone },
             { title: "360 Gym ERP Setup", price: "Custom Quote", desc: "End-to-end ERP implementation for multi-location scaling.", icon: Layers }
         ],
-        icon: CreditCard
+        icon: Puzzle
     },
     {
-        id: 15,
+        id: 16,
         type: 'grid-cards',
         title: "FUTURE ECOSYSTEM ACCESS",
         subtitle: "FIRST MOVER ADVANTAGE",
@@ -302,7 +309,7 @@ export const slides = [
         icon: Rocket
     },
     {
-        id: 16,
+        id: 17,
         type: 'quote',
         title: "WHY SCALE MATTERS",
         subtitle: "THE FRANCHISE MINDSET",
@@ -311,7 +318,7 @@ export const slides = [
         icon: Flag
     },
     {
-        id: 17,
+        id: 18,
         type: 'ecosystem-flow',
         title: "FUTURE-PROOF SYSTEM",
         subtitle: "BUILT TO INTEGRATE",
@@ -326,7 +333,7 @@ export const slides = [
         icon: Layers
     },
     {
-        id: 18,
+        id: 19,
         type: 'final-cta',
         title: "FINAL THOUGHTS",
         subtitle: "BUILD TOMORROW",

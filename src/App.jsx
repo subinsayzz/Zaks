@@ -787,6 +787,68 @@ const EcosystemFlowSlide = ({ slide }) => (
   </div>
 );
 
+// --- ADD-ONS SLIDE ---
+const AddOnsSlide = ({ slide }) => (
+  <div className="flex flex-col h-full justify-center items-center w-full relative overflow-hidden">
+    {/* Orbital Background Decor */}
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="w-[500px] h-[500px] rounded-full border border-white/[0.03] absolute animate-[spin_60s_linear_infinite]" />
+      <div className="w-[800px] h-[800px] rounded-full border border-white/[0.02] absolute animate-[spin_90s_linear_infinite_reverse]" />
+      <div className="w-[1100px] h-[1100px] rounded-full border border-white/[0.01] absolute" />
+    </div>
+
+    {/* Title Header */}
+    <div className="text-center mb-10 md:mb-16 flex-shrink-0 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+        className="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-accent font-bold tracking-[0.3em] uppercase text-[10px] mb-6 shadow-lg backdrop-blur-sm"
+      >
+        {slide.title}
+      </motion.div>
+      <motion.h1
+        initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+        className="text-4xl md:text-6xl lg:text-7xl font-black font-heading text-white tracking-tighter uppercase drop-shadow-2xl"
+      >
+        {slide.subtitle}
+      </motion.h1>
+    </div>
+
+    {/* Planet Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 relative z-10 w-full max-w-7xl px-4 overflow-y-auto custom-scrollbar p-4">
+      {slide.items.map((item, i) => (
+        <motion.div
+          key={i}
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: i * 0.1, type: "spring", stiffness: 100 }}
+          whileHover={{ scale: 1.05, y: -10 }}
+          className="aspect-square w-full max-w-[280px] mx-auto rounded-full bg-gradient-to-br from-white/10 via-white/[0.02] to-black/40 border border-white/10 backdrop-blur-md flex flex-col items-center justify-center p-6 text-center group relative cursor-default shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_60px_rgba(220,38,38,0.2)] hover:border-accent/40 transition-all duration-500"
+        >
+          {/* Inner Highlight Ring */}
+          <div className="absolute inset-[1px] rounded-full border border-white/5 opacity-50 pointer-events-none" />
+
+          {/* Glow Accent */}
+          <div className="absolute top-0 inset-x-0 h-1/2 bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-full pointer-events-none" />
+
+          {/* Icon */}
+          <div className="w-16 h-16 flex-shrink-0 rounded-2xl bg-black/40 border border-white/10 flex items-center justify-center text-white/80 mb-5 group-hover:scale-110 group-hover:bg-accent group-hover:text-white group-hover:border-accent group-hover:rotate-6 transition-all duration-500 shadow-lg relative z-10">
+            <item.icon size={30} />
+          </div>
+
+          <h3 className="text-white font-bold uppercase tracking-widest text-xs md:text-sm mb-3 relative z-10 group-hover:text-accent transition-colors">{item.title}</h3>
+          <div className="text-white/60 text-[10px] md:text-xs leading-relaxed mb-5 line-clamp-3 px-2 relative z-10 font-light group-hover:text-white/80">{item.desc}</div>
+
+          <div className="mt-auto relative z-10">
+            <span className="inline-block bg-white/5 border border-white/10 rounded-full px-4 py-1.5 text-white/90 font-mono text-[10px] md:text-xs font-bold group-hover:bg-accent group-hover:text-white group-hover:border-accent transition-colors shadow-lg">
+              {item.price}
+            </span>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+
 // --- FINAL CTA SLIDE ---
 const FinalCtaSlide = ({ slide }) => (
   <div className="flex flex-col items-center justify-center h-full text-center relative z-10">
@@ -890,6 +952,7 @@ function App() {
       case 'checklist': return <ListSlide slide={{ ...slide, points: slide.checklist }} />;
       case 'feature': return <GridSlide slide={{ ...slide, items: slide.features }} />;
       case 'ecosystem-flow': return <EcosystemFlowSlide slide={slide} />;
+      case 'addons': return <AddOnsSlide slide={slide} />;
       case 'final-cta': return <FinalCtaSlide slide={slide} />;
       case 'quote': return (
         <div className="flex flex-col justify-center items-center h-full max-w-4xl mx-auto text-center relative z-10 px-6">
