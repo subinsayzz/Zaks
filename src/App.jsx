@@ -123,94 +123,133 @@ const TitleSlide = ({ slide }) => (
 );
 
 const ListSlide = ({ slide }) => (
-  <div className="flex flex-col h-full overflow-y-auto custom-scrollbar pr-4">
-    {slide.mainIdea && (
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-        className="text-xl md:text-3xl font-heading font-medium text-white/90 mb-10 max-w-4xl leading-tight"
-      >
-        {slide.mainIdea}
-      </motion.div>
-    )}
+  <div className="h-full w-full overflow-y-auto custom-scrollbar">
+    <div className="min-h-full flex flex-col justify-center max-w-5xl mx-auto w-full p-4 md:p-8">
+      <div className="flex-shrink-0 w-full">
+        {slide.mainIdea && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
+            className="text-2xl md:text-3xl font-heading font-medium text-white/90 mb-8 md:mb-10 text-center leading-tight"
+          >
+            {slide.mainIdea}
+          </motion.div>
+        )}
 
-    <div className="grid gap-4 md:gap-6">
-      {slide.points.map((point, i) => (
-        <motion.div
-          key={i}
-          custom={i}
-          variants={contentVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex items-start gap-4 p-4 md:p-6 bg-white/5 border border-white/5 rounded-xl hover:border-accent/40 transition-colors group"
-        >
-          <div className="mt-1 min-w-[24px] text-accent/50 group-hover:text-accent transition-colors">
-            <ArrowRight size={24} />
-          </div>
-          <span className="text-lg md:text-xl text-white/80 font-body">{point}</span>
-        </motion.div>
-      ))}
-    </div>
+        <div className="grid gap-4 md:gap-5">
+          {slide.points.map((point, i) => (
+            <motion.div
+              key={i}
+              custom={i}
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex items-center gap-6 p-5 md:p-6 bg-white/5 border border-white/5 rounded-2xl hover:border-accent/40 hover:bg-white/[0.08] transition-all group backdrop-blur-sm"
+            >
+              <div className="flex-shrink-0 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/5 flex items-center justify-center text-accent/50 group-hover:text-accent group-hover:scale-110 group-hover:bg-accent/10 border border-white/5 group-hover:border-accent/20 transition-all duration-300">
+                {slide.type === 'checklist' ? <Check size={20} /> : <ArrowRight size={20} />}
+              </div>
+              <span className="text-lg md:text-xl text-zinc-300 font-medium group-hover:text-white transition-colors">{point}</span>
+            </motion.div>
+          ))}
+        </div>
 
-    {slide.highlight && (
-      <div className="mt-8 p-4 bg-accent/10 border border-accent/20 rounded-xl text-center text-accent font-bold">
-        {slide.highlight}
+        {slide.highlight && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}
+            className="mt-8 md:mt-10 p-5 bg-gradient-to-r from-accent/10 to-transparent border-l-4 border-accent rounded-r-xl"
+          >
+            <div className="text-accent font-bold uppercase tracking-widest text-xs mb-1">Key Takeaway</div>
+            <div className="text-white font-medium text-lg">{slide.highlight}</div>
+          </motion.div>
+        )}
+
+        {slide.footer && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+            className="mt-8 md:mt-12 text-center pb-8"
+          >
+            <span className="inline-block px-4 py-2 rounded-full border border-white/10 bg-white/5 text-accent font-bold tracking-widest uppercase text-xs shadow-lg">
+              {slide.footer}
+            </span>
+          </motion.div>
+        )}
       </div>
-    )}
-
-    {slide.footer && (
-      <motion.div
-        initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
-        className="mt-8 pt-8 text-accent font-bold tracking-widest uppercase text-sm border-t border-white/5"
-      >
-        {slide.footer}
-      </motion.div>
-    )}
+    </div>
   </div>
 );
 
 const ComparisonSlide = ({ slide }) => (
-  <div className="flex flex-col h-full overflow-hidden">
-    <div className="text-xl text-white/80 mb-6 font-light hidden md:block">{slide.mainIdea}</div>
+  <div className="flex flex-col h-full">
+    {/* Header */}
+    <div className="text-xl md:text-2xl text-zinc-400 mb-8 font-light hidden md:block text-center max-w-4xl mx-auto">{slide.mainIdea}</div>
 
-    <div className="grid md:grid-cols-2 gap-4 md:gap-8 overflow-y-auto mb-6 flex-shrink-0">
-      {/* Left Column */}
+    <div className="grid md:grid-cols-2 gap-6 md:gap-8 flex-1 overflow-visible">
+
+      {/* Left Column: The Problem / Current State */}
       <motion.div
-        initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-        className="bg-white/5 rounded-2xl p-6 md:p-8 border border-white/5 flex flex-col"
+        initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
+        className="bg-gradient-to-br from-white/[0.03] to-transparent rounded-[32px] p-8 border border-white/5 flex flex-col relative overflow-hidden group hover:border-white/10 transition-colors"
       >
-        <div className="text-white/40 uppercase tracking-widest font-bold mb-6 text-xs md:text-sm">{slide.col1Title}</div>
-        <ul className="space-y-4 flex-1">
+        {/* Subtle Background Icon */}
+        <div className="absolute -bottom-10 -left-10 text-white/[0.02] group-hover:text-white/[0.04] transition-colors transform rotate-12 scale-150 pointer-events-none">
+          <div className="w-64 h-64 rounded-full border-4 border-dashed border-current opacity-20" />
+        </div>
+
+        <div className="inline-block px-3 py-1 bg-white/10 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500 mb-8 self-start border border-white/5">
+          {slide.col1Title}
+        </div>
+
+        <ul className="space-y-4 flex-1 relative z-10">
           {slide.col1.map((item, i) => (
-            <li key={i} className="text-white/50 text-base md:text-xl font-body flex items-center gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
-              {item}
-            </li>
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="text-zinc-400 text-lg font-medium flex items-start gap-4"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-zinc-600 mt-2.5 flex-shrink-0" />
+              <span className="leading-relaxed">{item}</span>
+            </motion.li>
           ))}
         </ul>
+
         {slide.col1Footer && (
-          <div className="mt-6 pt-4 border-t border-white/10 text-white/50 text-sm font-bold font-mono leading-relaxed whitespace-pre-line">
+          <div className="mt-8 pt-6 border-t border-white/5 text-zinc-500 text-xs font-bold font-mono leading-relaxed uppercase tracking-wide">
             {slide.col1Footer}
           </div>
         )}
       </motion.div>
 
-      {/* Right Column */}
+      {/* Right Column: The Solution / Future State */}
       <motion.div
-        initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}
-        className="bg-accent/5 rounded-2xl p-6 md:p-8 border border-accent/20 flex flex-col relative overflow-hidden"
+        initial={{ x: 30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2 }}
+        className="bg-gradient-to-br from-accent/5 to-transparent rounded-[32px] p-8 border border-accent/20 flex flex-col relative overflow-hidden group hover:bg-accent/[0.08] transition-colors shadow-2xl shadow-accent/5"
       >
-        <div className="absolute top-0 right-0 p-32 bg-accent/5 blur-[100px] rounded-full pointer-events-none" />
-        <div className="text-accent uppercase tracking-widest font-bold mb-6 text-xs md:text-sm relative z-10">{slide.col2Title}</div>
+        {/* Glow Effect */}
+        <div className="absolute top-0 right-0 p-32 bg-accent/10 blur-[120px] rounded-full pointer-events-none" />
+
+        <div className="inline-block px-3 py-1 bg-accent/10 rounded-lg text-[10px] font-bold uppercase tracking-[0.2em] text-accent mb-8 self-start border border-accent/20">
+          {slide.col2Title}
+        </div>
+
         <ul className="space-y-4 relative z-10 flex-1">
           {slide.col2.map((item, i) => (
-            <li key={i} className="text-white text-base md:text-xl font-body font-medium flex items-center gap-3">
-              <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-              {item}
-            </li>
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 + (i * 0.1) }}
+              className="text-white text-xl font-medium flex items-start gap-4"
+            >
+              <div className="w-1.5 h-1.5 rounded-full bg-accent mt-2.5 flex-shrink-0 shadow-[0_0_10px_rgba(220,38,38,0.8)]" />
+              <span className="leading-relaxed">{item}</span>
+            </motion.li>
           ))}
         </ul>
+
         {slide.col2Footer && (
-          <div className="mt-6 pt-4 border-t border-accent/10 text-accent/80 text-sm font-bold font-mono leading-relaxed relative z-10 whitespace-pre-line">
+          <div className="mt-8 pt-6 border-t border-accent/20 text-accent text-xs font-bold font-mono leading-relaxed uppercase tracking-wide relative z-10">
             {slide.col2Footer}
           </div>
         )}
@@ -222,10 +261,12 @@ const ComparisonSlide = ({ slide }) => (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="mt-auto border-t border-white/10 pt-6 text-white/70 text-base md:text-lg leading-relaxed whitespace-pre-line"
+        transition={{ delay: 0.5 }}
+        className="mt-8 text-center"
       >
-        {slide.conclusion}
+        <div className="inline-block bg-white/5 border border-white/10 rounded-xl px-8 py-4 text-zinc-300 text-base md:text-lg leading-relaxed shadow-lg backdrop-blur-md">
+          {slide.conclusion}
+        </div>
       </motion.div>
     )}
   </div>
@@ -661,85 +702,88 @@ const GridSlide = ({ slide }) => (
 
 // --- ECOSYSTEM FLOW SLIDE ---
 const EcosystemFlowSlide = ({ slide }) => (
-  <div className="flex flex-col h-full justify-center">
-    <div className="text-xl md:text-2xl font-light text-white/80 mb-8 text-center max-w-3xl mx-auto">{slide.mainIdea}</div>
+  <div className="h-full w-full overflow-y-auto custom-scrollbar">
+    <div className="min-h-full flex flex-col justify-center p-4 md:p-8">
+      <div className="text-xl md:text-2xl font-light text-white/80 mb-8 text-center max-w-3xl mx-auto">{slide.mainIdea}</div>
 
-    <div className="flex-1 flex flex-col md:flex-row items-stretch gap-4 md:gap-12 relative mb-8">
-      {/* Connection Line (Desktop) */}
-      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[2px] z-0">
-        <div className="w-full h-full bg-gradient-to-r from-accent/20 to-accent/20 dashed-line relative overflow-hidden">
-          <div className="absolute inset-0 bg-accent w-1/2 animate-flow-right blur-md"></div>
+      <div className="flex flex-col md:flex-row items-stretch gap-4 md:gap-12 relative mb-8">
+        {/* Connection Line (Desktop) */}
+        <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[2px] z-0">
+          <div className="w-full h-full bg-gradient-to-r from-accent/20 to-accent/20 dashed-line relative overflow-hidden">
+            <div className="absolute inset-0 bg-accent w-1/2 animate-flow-right blur-md"></div>
+          </div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-2 rounded-full border border-white/10 z-10">
+            <ArrowRight size={16} className="text-accent animate-pulse" />
+          </div>
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-2 rounded-full border border-white/10 z-10">
-          <ArrowRight size={16} className="text-accent animate-pulse" />
-        </div>
+
+        {/* Left: Physical */}
+        <motion.div
+          initial={{ x: -30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          className="flex-1 bg-white/5 border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:border-white/20 transition-colors"
+        >
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+          <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6 border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500">
+            <Dumbbell size={32} />
+          </div>
+          <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-6">{slide.col1Title}</h3>
+          <ul className="space-y-4 w-full max-w-xs mx-auto">
+            {slide.col1.map((item, i) => (
+              <li key={i} className="bg-bg/50 border border-white/5 rounded-lg py-3 px-4 text-white/70 text-sm font-medium flex items-center justify-center gap-2">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+
+        {/* Right: Digital */}
+        <motion.div
+          initial={{ x: 30, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="flex-1 bg-accent/5 border border-accent/20 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:bg-accent/10 transition-colors"
+        >
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-50" />
+          <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
+
+          <div className="w-16 h-16 rounded-2xl bg-accent/20 flex items-center justify-center text-accent mb-6 border border-accent/20 shadow-lg group-hover:scale-110 transition-transform duration-500">
+            <Layers size={32} />
+          </div>
+          <h3 className="text-white font-bold tracking-widest uppercase text-sm mb-6">{slide.col2Title}</h3>
+          <ul className="space-y-4 w-full max-w-xs mx-auto relative z-10">
+            {slide.col2.map((item, i) => (
+              <li key={i} className="bg-bg/50 border border-accent/10 rounded-lg py-3 px-4 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+                {item}
+              </li>
+            ))}
+          </ul>
+        </motion.div>
       </div>
 
-      {/* Left: Physical */}
+      {/* Bottom flow & Statement */}
       <motion.div
-        initial={{ x: -30, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        className="flex-1 bg-white/5 border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:border-white/20 transition-colors"
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.4 }}
+        className="text-center"
       >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
-        <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6 border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500">
-          <Dumbbell size={32} />
+        <div className="inline-flex items-center gap-3 text-white/40 text-sm font-mono uppercase tracking-wide mb-6 bg-white/5 px-4 py-2 rounded-full">
+          <Zap size={14} className="text-yellow-400" />
+          {slide.process}
         </div>
-        <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-6">{slide.col1Title}</h3>
-        <ul className="space-y-4 w-full max-w-xs mx-auto">
-          {slide.col1.map((item, i) => (
-            <li key={i} className="bg-bg/50 border border-white/5 rounded-lg py-3 px-4 text-white/70 text-sm font-medium flex items-center justify-center gap-2">
-              {item}
-            </li>
-          ))}
-        </ul>
+
+        <div className="text-white/50 text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+          {slide.note}
+        </div>
+
+        <div className="text-xl md:text-3xl font-bold font-heading text-white tracking-tight uppercase leading-tight">
+          {slide.closure}
+          <div className="h-1 w-24 bg-accent mx-auto mt-4 rounded-full" />
+        </div>
       </motion.div>
 
-      {/* Right: Digital */}
-      <motion.div
-        initial={{ x: 30, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="flex-1 bg-accent/5 border border-accent/20 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:bg-accent/10 transition-colors"
-      >
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-50" />
-        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
-
-        <div className="w-16 h-16 rounded-2xl bg-accent/20 flex items-center justify-center text-accent mb-6 border border-accent/20 shadow-lg group-hover:scale-110 transition-transform duration-500">
-          <Layers size={32} />
-        </div>
-        <h3 className="text-white font-bold tracking-widest uppercase text-sm mb-6">{slide.col2Title}</h3>
-        <ul className="space-y-4 w-full max-w-xs mx-auto relative z-10">
-          {slide.col2.map((item, i) => (
-            <li key={i} className="bg-bg/50 border border-accent/10 rounded-lg py-3 px-4 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
-              {item}
-            </li>
-          ))}
-        </ul>
-      </motion.div>
     </div>
-
-    {/* Bottom flow & Statement */}
-    <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.4 }}
-      className="text-center"
-    >
-      <div className="inline-flex items-center gap-3 text-white/40 text-sm font-mono uppercase tracking-wide mb-6 bg-white/5 px-4 py-2 rounded-full">
-        <Zap size={14} className="text-yellow-400" />
-        {slide.process}
-      </div>
-
-      <div className="text-white/50 text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
-        {slide.note}
-      </div>
-
-      <div className="text-xl md:text-3xl font-bold font-heading text-white tracking-tight uppercase leading-tight">
-        {slide.closure}
-        <div className="h-1 w-24 bg-accent mx-auto mt-4 rounded-full" />
-      </div>
-    </motion.div>
   </div>
 );
 
