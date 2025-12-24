@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, ArrowRight, Check, X, Plus } from 'lucide-react';
+import { ChevronRight, ChevronLeft, ArrowRight, Check, X, Plus, Lock, Rocket, ShieldCheck, TrendingUp, Zap, Dumbbell, Layers } from 'lucide-react';
 import { slides } from './slidesData';
 import MobileAppMockup from './MobileAppMockup';
 import './index.css';
@@ -151,6 +151,12 @@ const ListSlide = ({ slide }) => (
       ))}
     </div>
 
+    {slide.highlight && (
+      <div className="mt-8 p-4 bg-accent/10 border border-accent/20 rounded-xl text-center text-accent font-bold">
+        {slide.highlight}
+      </div>
+    )}
+
     {slide.footer && (
       <motion.div
         initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
@@ -225,108 +231,277 @@ const ComparisonSlide = ({ slide }) => (
   </div>
 );
 
-const PricingSlide = ({ slide }) => (
-  <div className="flex flex-col h-full justify-center items-center p-4">
-    <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      className="w-full max-w-5xl bg-white/5 border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden"
-    >
-      <div className="absolute top-0 right-0 w-64 h-64 bg-accent/20 blur-[120px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+const MembershipCard = () => (
+  <div className="w-full max-w-sm aspect-[1.586] bg-gradient-to-br from-zinc-950 via-black to-zinc-900 rounded-2xl p-6 text-white shadow-2xl border border-white/10 relative overflow-hidden group mx-auto flex flex-col justify-between transform transition-transform hover:scale-105 duration-500 hover:border-yellow-500/50">
 
-      <div className="flex flex-col lg:flex-row gap-12 items-center">
-        <div className="flex-1 text-center lg:text-left">
-          <div className="text-accent uppercase tracking-widest font-bold mb-2 text-sm">One-Time Partnership Fee</div>
-          <div className="text-5xl md:text-7xl lg:text-8xl font-black font-heading text-white tracking-tighter mb-6">{slide.price}</div>
-          <div className="text-white/60 text-base md:text-lg leading-relaxed">
-            Full system setup, migration, and training. <br />
-            <span className="text-white font-bold">You own the system.</span>
+    {/* Shine Effect */}
+    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 via-transparent to-transparent opacity-50 pointer-events-none" />
+    <div className="absolute -inset-full bg-gradient-to-r from-transparent via-white/5 to-transparent rotate-45 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-1000 ease-in-out" />
+
+    {/* Top Row: Logo & Badge */}
+    <div className="flex justify-between items-start relative z-10 w-full mb-4">
+      <img src="/assets/logo.png" alt="Gymrupt" className="h-5 opacity-90 object-contain" />
+      <div className="border border-yellow-500/80 text-yellow-500 text-[8px] font-bold px-2 py-0.5 rounded tracking-widest uppercase bg-yellow-500/5 backdrop-blur-sm">
+        LIFETIME PARTNER
+      </div>
+    </div>
+
+    {/* Middle Row: Chip & Number */}
+    <div className="relative z-10 w-full flex flex-col gap-4 mt-2">
+      {/* Golden Chip */}
+      <div className="w-10 h-7 bg-gradient-to-br from-amber-200 via-amber-500 to-amber-700 rounded-md relative overflow-hidden shadow-md border border-amber-500/50 flex flex-col justify-center gap-[2px] px-0.5">
+        <div className="w-full h-px bg-black/10 border-b border-white/20" />
+        <div className="w-full h-px bg-black/10 border-b border-white/20" />
+        <div className="w-full h-px bg-black/10 border-b border-white/20" />
+        <div className="absolute top-1/2 -right-2 w-4 h-8 bg-gradient-to-l from-white/30 to-transparent transform -translate-y-1/2 rotate-12" />
+      </div>
+
+      {/* Card Number */}
+      <div className="font-mono text-lg tracking-[0.2em] text-white/95 drop-shadow-sm whitespace-nowrap pl-1">
+        •••• •••• •••• 0421
+      </div>
+    </div>
+
+    {/* Bottom Row: Holder & Validity */}
+    <div className="flex justify-between items-end relative z-10 w-full mt-auto pt-4">
+      <div className="flex flex-col text-left">
+        <span className="text-[7px] text-zinc-500 tracking-widest font-bold uppercase mb-0.5">CARD HOLDER</span>
+        <span className="text-xs tracking-widest font-bold uppercase text-zinc-100">ZAK'S GYM MASTER</span>
+      </div>
+      <div className="flex flex-col items-end text-right">
+        <span className="text-[7px] text-zinc-500 tracking-widest font-bold uppercase mb-0.5">VALID THRU</span>
+        <span className="text-xs tracking-widest font-bold uppercase text-zinc-100">FOREVER</span>
+      </div>
+    </div>
+  </div>
+);
+
+const PricingSlide = ({ slide }) => (
+  <div className="flex flex-col h-full justify-center">
+    <div className={`grid gap-6 h-full ${slide.addons ? 'lg:grid-cols-12' : 'place-items-center'}`}>
+
+      {/* Core Partnership Card */}
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        className={`${slide.addons ? 'lg:col-span-7 xl:col-span-8' : 'w-full max-w-5xl'} bg-zinc-900/50 border border-white/10 rounded-[32px] p-8 md:p-10 relative overflow-hidden flex flex-col justify-center shadow-2xl backdrop-blur-sm`}
+      >
+        {/* Ambient Backlight */}
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-indigo-500/10 blur-[150px] pointer-events-none rounded-full" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-amber-500/5 blur-[150px] pointer-events-none rounded-full" />
+
+        <div className="flex flex-col gap-10 h-full justify-center">
+
+          {/* Top Section: Card & Price Side-by-Side (Desktop) or Stacked */}
+          <div className="flex flex-col xl:flex-row items-center gap-8 xl:gap-12 pb-8 border-b border-white/5">
+            {/* Visual Card */}
+            <div className="w-full max-w-sm flex-shrink-0 transform hover:scale-[1.02] transition-transform duration-500">
+              <MembershipCard />
+            </div>
+
+            {/* Price & Value */}
+            <div className="text-center xl:text-left flex-1 space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-light border border-white/5 shadow-inner mb-2">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">One-Time Investment</span>
+              </div>
+              <div className="flex items-baseline justify-center xl:justify-start gap-2">
+                <div className="text-5xl md:text-6xl lg:text-7xl font-black font-heading tracking-tighter text-white bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70">
+                  {slide.price}
+                </div>
+                {slide.priceSuffix && (
+                  <span className="text-xl md:text-2xl text-white/30 font-medium tracking-normal uppercase">{slide.priceSuffix}</span>
+                )}
+              </div>
+              <div className="text-sm text-white/40 font-medium tracking-wide">
+                Own the asset clearly. No hidden fees.
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section: Features Grid */}
+          <div className="flex-1 flex flex-col justify-center">
+            <div className="text-white/30 font-bold tracking-[0.2em] uppercase text-[10px] mb-6 flex items-center gap-4">
+              <span className="whitespace-nowrap">What's Included</span>
+              <div className="h-px w-full bg-white/5"></div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              {slide.features.map((feature, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-center gap-3 p-4 rounded-xl bg-white/[0.03] hover:bg-white/[0.06] border border-white/5 transition-all group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-accent group-hover:scale-110 transition-transform">
+                    <Check size={16} />
+                  </div>
+                  <span className="text-zinc-300 font-medium text-sm md:text-base group-hover:text-white transition-colors">{feature}</span>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
+      </motion.div>
 
-        <div className="hidden lg:block w-px h-64 bg-gradient-to-b from-transparent via-white/10 to-transparent" />
-        <div className="block lg:hidden w-32 h-px bg-white/10" />
+      {/* Optional Add-ons Card */}
+      {slide.addons && (
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="lg:col-span-5 xl:col-span-4 bg-zinc-950 border border-white/10 rounded-[32px] p-8 flex flex-col relative overflow-hidden h-full shadow-2xl"
+        >
+          <div className="absolute inset-0 bg-dotted-pattern opacity-5 pointer-events-none" />
 
-        <div className="flex-1 space-y-4 w-full">
-          {slide.features.map((feature, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex items-center gap-4 text-white/90 text-base md:text-lg font-medium p-3 rounded-lg hover:bg-white/5 transition-colors"
-            >
-              <div className="min-w-[20px] text-accent"><Check size={20} /></div>
-              {feature}
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
+          <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-6 relative z-10">
+            <div>
+              <div className="text-white font-bold text-xl leading-none">Power Add-Ons</div>
+              <div className="text-zinc-500 text-[10px] font-bold uppercase tracking-widest mt-2">Optional "Done-For-You"</div>
+            </div>
+            <div className="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center text-accent border border-accent/20">
+              <Plus size={20} />
+            </div>
+          </div>
+
+          <div className="space-y-3 flex-1 overflow-y-auto pr-1 custom-scrollbar-dark relative z-10">
+            {slide.addons.map((addon, i) => (
+              <div key={i} className="group p-5 rounded-2xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/5 hover:border-accent/20 transition-all hover:translate-x-1 cursor-default">
+                <div className="flex justify-between items-center mb-2">
+                  <div className="font-bold text-zinc-200 group-hover:text-accent transition-colors text-sm">{addon.title}</div>
+                  {addon.icon && <addon.icon size={14} className="text-zinc-600 group-hover:text-accent transition-colors" />}
+                </div>
+                <div className="text-xs text-zinc-500 leading-relaxed mb-3 line-clamp-2">{addon.desc}</div>
+                <div className="inline-block px-2 py-1 bg-accent/5 rounded border border-accent/10 text-accent font-mono font-bold text-[10px] uppercase tracking-wider">{addon.price}</div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
+
+    </div>
   </div>
 );
 
 const GuaranteeSlide = ({ slide }) => (
-  <div className="grid md:grid-cols-2 gap-6 h-full items-center overflow-y-auto p-2">
-    {slide.rules.map((rule, i) => (
-      <motion.div
-        key={i}
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: i * 0.2 }}
-        className="bg-white/5 border border-white/10 p-8 md:p-10 rounded-3xl h-full flex flex-col justify-center hover:bg-white/10 transition-colors relative overflow-hidden group"
-      >
-        <div className="absolute top-0 right-0 p-24 bg-accent/5 rounded-full blur-3xl group-hover:bg-accent/10 transition-colors" />
+  <div className="flex flex-col h-full justify-center">
+    <div className="grid md:grid-cols-2 gap-8 h-full md:h-auto items-stretch">
+      {slide.rules.map((rule, i) => (
+        <motion.div
+          key={i}
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: i * 0.2 }}
+          className="relative group isolate"
+        >
+          {/* Glowing background effect */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl blur-xl -z-10" />
 
-        <div className="w-12 h-12 bg-accent/20 rounded-xl flex items-center justify-center text-accent mb-6 font-bold text-xl font-heading">
-          {i + 1}
-        </div>
-        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 font-heading">{rule.title}</h3>
-        <div className="text-accent text-3xl font-black font-mono mb-4">{rule.amount}</div>
-        <p className="text-white/60 text-base md:text-lg leading-relaxed">{rule.desc}</p>
-      </motion.div>
-    ))}
+          <div className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl h-full flex flex-col justify-between hover:bg-white/10 hover:border-accent/50 transition-all duration-300 relative overflow-hidden">
+
+            {/* Background Icon Watermark */}
+            <div className="absolute -bottom-10 -right-10 text-white/5 group-hover:text-accent/10 transition-colors transform rotate-12 scale-150 pointer-events-none">
+              {i === 0 ? <ShieldCheck size={200} /> : <TrendingUp size={200} />}
+            </div>
+
+            <div>
+              <div className="flex justify-between items-start mb-6">
+                <div className="inline-flex items-center justify-center px-4 py-1 rounded-full bg-accent/20 border border-accent/20 text-accent text-xs font-bold uppercase tracking-widest">
+                  Rule 0{i + 1}
+                </div>
+                {i === 0 ? <Lock className="text-white/20" size={32} /> : <Rocket className="text-white/20" size={32} />}
+              </div>
+
+              <h3 className="text-3xl md:text-4xl font-black text-white mb-2 font-heading tracking-tight">{rule.title}</h3>
+              <p className="text-white/60 text-lg leading-relaxed max-w-sm relative z-10">{rule.desc}</p>
+            </div>
+
+            <div className="mt-12 relative z-10">
+              <div className="text-sm text-white/40 uppercase tracking-widest font-bold mb-2">Target Metric</div>
+              <div className="text-5xl md:text-6xl font-black text-accent font-mono tracking-tighter">
+                {rule.amount}
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    <div className="mt-8 text-center bg-white/5 p-4 rounded-xl border border-white/5 inline-block mx-auto">
+      <div className="inline-flex items-center gap-2 text-white/60 font-bold uppercase tracking-widest text-xs">
+        <ShieldCheck size={16} className="text-accent" /> 100% Risk-Free Partnership Guarantee
+      </div>
+    </div>
   </div>
 );
 
 const CostCalculatorSlide = ({ slide }) => {
+  const totalCost = slide.items.reduce((acc, item) => acc + parseInt(item.cost), 0);
+  const annualCost = totalCost * 12;
+
   return (
     <div className="h-full flex flex-col">
-      <div className="text-xl md:text-2xl font-light text-white/80 mb-8">{slide.mainIdea}</div>
+      <div className="text-xl md:text-2xl font-light text-white/80 mb-6">{slide.mainIdea}</div>
 
-      <div className="grid md:grid-cols-2 gap-8 flex-1">
-        {/* Left: Chaos List */}
-        <div className="flex flex-col gap-3">
-          {slide.items.map((item, i) => (
-            <motion.div
-              key={i}
-              custom={i}
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex justify-between items-center p-4 bg-white/5 rounded-xl border border-white/5 hover:border-red-500/30 transition-colors"
-            >
-              <div className="font-medium text-white/80">{item.name}</div>
-              <div className="font-mono text-red-500 font-bold">{item.cost}</div>
-            </motion.div>
-          ))}
-          <div className="mt-4 p-4 rounded-xl border border-dashed border-white/20 text-center text-white/40 text-sm">
-            + Hidden integration costs...
+      <div className="flex flex-col lg:flex-row gap-8 flex-1 overflow-hidden">
+        {/* Left: Apps Grid */}
+        <div className="flex-1 overflow-y-auto pr-2">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {slide.items.map((item, i) => (
+              <motion.div
+                key={i}
+                custom={i}
+                variants={contentVariants}
+                initial="hidden"
+                animate="visible"
+                className="flex flex-col items-center justify-center p-4 bg-white/5 rounded-xl border border-white/5 hover:border-accent/40 hover:bg-white/10 transition-all group text-center gap-2"
+              >
+                <div className="p-2 bg-accent/10 rounded-full text-accent group-hover:scale-110 transition-transform">
+                  {item.icon ? <item.icon size={20} /> : <Check size={20} />}
+                </div>
+                <div className="text-xs font-bold text-white/90 uppercase tracking-wide">{item.name}</div>
+                <div className="text-xs font-mono text-white/50">₹{parseInt(item.cost).toLocaleString()}/mo</div>
+              </motion.div>
+            ))}
+            <div className="col-span-2 md:col-span-3 p-3 border-2 border-dashed border-white/10 rounded-xl flex items-center justify-center text-white/30 font-bold uppercase tracking-widest text-xs hover:bg-white/5 transition-colors cursor-default">
+              + And Much More...
+            </div>
           </div>
         </div>
 
-        {/* Right: Summary */}
-        <div className="flex flex-col justify-center items-center p-8 bg-red-900/10 rounded-3xl border border-red-500/20 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-red-500/5 to-transparent pointer-events-none" />
-          <h3 className="text-white/60 uppercase tracking-widest text-sm font-bold mb-4">The Monthly Reality</h3>
-          <div className="text-6xl md:text-7xl font-black text-white mb-2">~₹38k<span className="text-2xl text-white/40">/mo</span></div>
-          <div className="text-red-400 font-mono text-lg mb-8">Every single month. Forever.</div>
+        {/* Right: Receipt / Calculation */}
+        <div className="w-full lg:w-96 flex-shrink-0 bg-white shadow-2xl rounded-2xl p-6 text-slate-900 flex flex-col relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-accent to-purple-600" />
 
-          <div className="h-px w-full bg-white/10 mb-8" />
+          <h3 className="text-slate-500 uppercase tracking-widest text-xs font-bold mb-6">Cost of Separation</h3>
 
-          <div className="text-white font-bold text-xl mb-2">Gymrupt replaces ALL of this.</div>
-          <p className="text-white/60 text-sm">{slide.conclusion}</p>
+          <div className="space-y-3 mb-6 flex-1 overflow-y-auto max-h-[200px] lg:max-h-none custom-scrollbar-dark">
+            {slide.items.map((item, i) => (
+              <div key={i} className="flex justify-between text-sm border-b border-slate-100 pb-2">
+                <span className="text-slate-600">{item.name}</span>
+                <span className="font-mono font-bold text-slate-800">₹{parseInt(item.cost).toLocaleString()}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-auto pt-4 border-t-2 border-slate-900">
+            <div className="flex justify-between items-end mb-2">
+              <span className="text-slate-500 font-bold text-sm">Monthly Total</span>
+              <span className="text-2xl font-black font-mono text-slate-900">₹{totalCost.toLocaleString()}</span>
+            </div>
+            <div className="flex justify-between items-end mb-6">
+              <span className="text-red-500 font-bold text-xs uppercase">Annual Cost</span>
+              <span className="text-lg font-bold font-mono text-red-500">₹{annualCost.toLocaleString()}</span>
+            </div>
+
+            <div className="bg-slate-900 text-white p-4 rounded-xl text-center">
+              <div className="text-accent text-xs font-bold uppercase tracking-wider mb-1">With Gymrupt</div>
+              <div className="text-2xl font-black">ONE PRICE</div>
+              <div className="text-white/60 text-[10px] mt-1">Replaces everything above.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -345,27 +520,67 @@ const AppShowcaseSlide = ({ slide }) => (
           variants={contentVariants}
           initial="hidden"
           animate="visible"
-          className="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/5"
+          className="flex items-start gap-4 p-4 bg-white/5 rounded-xl border border-white/5"
         >
-          <div className="p-2 bg-accent/20 rounded-lg text-accent">
+          <div className="p-2 bg-accent/20 rounded-lg text-accent mt-1">
             {feature.icon ? <feature.icon size={20} /> : <Check size={20} />}
           </div>
-          <span className="text-lg font-medium text-white">{feature.text || feature}</span>
+          <div>
+            <div className="text-base font-bold text-white">{feature.title || feature.text || feature}</div>
+            {feature.desc && <div className="text-xs text-white/60 mt-1 leading-relaxed">{feature.desc}</div>}
+          </div>
         </motion.div>
       ))}
       {slide.note && <div className="text-accent font-bold mt-6 tracking-widest uppercase text-sm">{slide.note}</div>}
     </div>
 
-    {/* Visual Mockup Area */}
+    {/* Visual Mockup Area with Annotations */}
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.3 }}
-      className="hidden md:flex justify-center items-center relative h-full w-full"
+      className="hidden md:flex flex-col justify-center items-center relative h-full w-full pl-12"
     >
-      <div className="transform scale-90 lg:scale-100 origin-center">
-        <MobileAppMockup />
+      <div className="relative">
+        <div className="transform scale-90 lg:scale-100 origin-center relative z-20 shadow-2xl rounded-[55px]">
+          <MobileAppMockup />
+        </div>
+
+        {/* Annotation: Members Connect (Top Left) */}
+        {/* Anchored to the LEFT edge of the phone */}
+        <div className="absolute top-[12%] right-[96%] flex items-center gap-2 z-10 pr-4">
+          <div className="bg-[#1a1a1a] px-3 py-2 rounded-lg text-[10px] font-bold border border-white/20 text-white shadow-xl whitespace-nowrap">
+            Members Connect
+          </div>
+          <div className="w-12 h-px border-t border-dashed border-white/40" />
+          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+        </div>
+
+        {/* Annotation: Book Workshops (Right Middle) */}
+        {/* Anchored to the RIGHT edge of the phone */}
+        <div className="absolute top-[40%] left-[96%] flex items-center gap-2 z-10 pl-4 flex-row-reverse">
+          <div className="bg-[#1a1a1a] px-3 py-2 rounded-lg text-[10px] font-bold border border-white/20 text-white shadow-xl whitespace-nowrap">
+            Book Workshops
+          </div>
+          <div className="w-12 h-px border-t border-dashed border-white/40" />
+          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+        </div>
+
+        {/* Annotation: Track Progress (Bottom Left) */}
+        {/* Anchored to the LEFT edge of the phone */}
+        <div className="absolute bottom-[20%] right-[96%] flex items-center gap-2 z-10 pr-4">
+          <div className="bg-[#1a1a1a] px-3 py-2 rounded-lg text-[10px] font-bold border border-white/20 text-white shadow-xl whitespace-nowrap">
+            Track Progress
+          </div>
+          <div className="w-12 h-px border-t border-dashed border-white/40" />
+          <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+        </div>
       </div>
+
+      <p className="mt-8 text-white/30 text-[10px] text-center max-w-sm font-mono uppercase tracking-widest leading-relaxed">
+        * Concept Visualization. <br />
+        Your final app will be custom built and tailored to your brand.
+      </p>
     </motion.div>
   </div>
 );
@@ -388,7 +603,7 @@ const GridSlide = ({ slide }) => (
         >
           <div className="flex justify-between items-start">
             <div className="text-white/40 text-xs uppercase tracking-wider font-bold">
-              {slide.type === 'powerups' ? 'Add-on' : 'Bonus'}
+              {item.tag ? item.tag : (slide.type === 'powerups' ? 'Add-on' : 'System-Included')}
             </div>
             {item.icon && <item.icon className="text-accent opacity-50 group-hover:opacity-100 transition-opacity" size={20} />}
           </div>
@@ -411,6 +626,177 @@ const GridSlide = ({ slide }) => (
         {slide.highlight}
       </div>
     )}
+
+    {slide.limitedOffer && (
+      <div className="mt-4 p-4 rounded-xl border-2 border-dashed border-amber-500/30 bg-amber-500/5 flex items-center justify-between gap-4">
+        <div>
+          <div className="text-amber-500 text-xs font-bold uppercase tracking-wider mb-1">{slide.limitedOffer.tag}</div>
+          <div className="text-white font-heading font-bold text-lg">{slide.limitedOffer.title}</div>
+          <div className="text-white/60 text-sm mt-1">{slide.limitedOffer.desc}</div>
+        </div>
+        <div className="text-right">
+          <div className="text-amber-500 font-mono font-bold text-xl">{slide.limitedOffer.value}</div>
+        </div>
+      </div>
+    )}
+
+    {slide.pricingDetails && (
+      <div className="mt-4 p-5 rounded-xl bg-white/5 border border-white/10">
+        <div className="text-xs font-bold text-white/40 uppercase tracking-widest mb-3">Indicative Pricing (Activates only after value is proven)</div>
+        <div className="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm">
+          {slide.pricingDetails.items.map((item, i) => (
+            <div key={i} className="flex justify-between items-center border-b border-white/5 pb-1 last:border-0">
+              <span className="text-white/70">{item.label}</span>
+              <span className="text-accent font-mono font-bold">{item.price}</span>
+            </div>
+          ))}
+        </div>
+        <div className="mt-3 text-[10px] text-white/30 text-center font-mono uppercase tracking-widest">
+          {slide.pricingDetails.footer}
+        </div>
+      </div>
+    )}
+  </div>
+);
+
+// --- ECOSYSTEM FLOW SLIDE ---
+const EcosystemFlowSlide = ({ slide }) => (
+  <div className="flex flex-col h-full justify-center">
+    <div className="text-xl md:text-2xl font-light text-white/80 mb-8 text-center max-w-3xl mx-auto">{slide.mainIdea}</div>
+
+    <div className="flex-1 flex flex-col md:flex-row items-stretch gap-4 md:gap-12 relative mb-8">
+      {/* Connection Line (Desktop) */}
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[2px] z-0">
+        <div className="w-full h-full bg-gradient-to-r from-accent/20 to-accent/20 dashed-line relative overflow-hidden">
+          <div className="absolute inset-0 bg-accent w-1/2 animate-flow-right blur-md"></div>
+        </div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-bg p-2 rounded-full border border-white/10 z-10">
+          <ArrowRight size={16} className="text-accent animate-pulse" />
+        </div>
+      </div>
+
+      {/* Left: Physical */}
+      <motion.div
+        initial={{ x: -30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        className="flex-1 bg-white/5 border border-white/5 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:border-white/20 transition-colors"
+      >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-50" />
+        <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6 border border-white/10 shadow-lg group-hover:scale-110 transition-transform duration-500">
+          <Dumbbell size={32} />
+        </div>
+        <h3 className="text-accent font-bold tracking-widest uppercase text-sm mb-6">{slide.col1Title}</h3>
+        <ul className="space-y-4 w-full max-w-xs mx-auto">
+          {slide.col1.map((item, i) => (
+            <li key={i} className="bg-bg/50 border border-white/5 rounded-lg py-3 px-4 text-white/70 text-sm font-medium flex items-center justify-center gap-2">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+
+      {/* Right: Digital */}
+      <motion.div
+        initial={{ x: 30, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="flex-1 bg-accent/5 border border-accent/20 rounded-3xl p-6 md:p-8 flex flex-col items-center text-center relative overflow-hidden group hover:bg-accent/10 transition-colors"
+      >
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-accent/50 to-transparent opacity-50" />
+        <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 blur-[80px] rounded-full pointer-events-none" />
+
+        <div className="w-16 h-16 rounded-2xl bg-accent/20 flex items-center justify-center text-accent mb-6 border border-accent/20 shadow-lg group-hover:scale-110 transition-transform duration-500">
+          <Layers size={32} />
+        </div>
+        <h3 className="text-white font-bold tracking-widest uppercase text-sm mb-6">{slide.col2Title}</h3>
+        <ul className="space-y-4 w-full max-w-xs mx-auto relative z-10">
+          {slide.col2.map((item, i) => (
+            <li key={i} className="bg-bg/50 border border-accent/10 rounded-lg py-3 px-4 text-white text-sm font-bold flex items-center justify-center gap-2 shadow-sm">
+              {item}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    </div>
+
+    {/* Bottom flow & Statement */}
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.4 }}
+      className="text-center"
+    >
+      <div className="inline-flex items-center gap-3 text-white/40 text-sm font-mono uppercase tracking-wide mb-6 bg-white/5 px-4 py-2 rounded-full">
+        <Zap size={14} className="text-yellow-400" />
+        {slide.process}
+      </div>
+
+      <div className="text-white/50 text-sm max-w-2xl mx-auto mb-8 leading-relaxed">
+        {slide.note}
+      </div>
+
+      <div className="text-xl md:text-3xl font-bold font-heading text-white tracking-tight uppercase leading-tight">
+        {slide.closure}
+        <div className="h-1 w-24 bg-accent mx-auto mt-4 rounded-full" />
+      </div>
+    </motion.div>
+  </div>
+);
+
+// --- FINAL CTA SLIDE ---
+const FinalCtaSlide = ({ slide }) => (
+  <div className="flex flex-col items-center justify-center h-full text-center relative z-10">
+    <div className="absolute inset-0 bg-accent/5 blur-[150px] rounded-full pointer-events-none" />
+
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="mb-8"
+    >
+      <div className="w-20 h-20 bg-accent/10 border border-accent/20 rounded-2xl flex items-center justify-center text-accent mx-auto shadow-2xl shadow-accent/10 mb-8 rotate-3">
+        <Rocket size={40} />
+      </div>
+      <h2 className="text-white/40 font-bold tracking-[0.4em] uppercase text-xs md:text-sm mb-4">{slide.title}</h2>
+      <h1 className="text-5xl md:text-7xl lg:text-8xl font-black font-heading text-white uppercase leading-none tracking-tighter mb-8">
+        {slide.subtitle}
+      </h1>
+    </motion.div>
+
+    <motion.p
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.2 }}
+      className="text-xl md:text-2xl text-white/70 max-w-3xl mx-auto mb-12 font-light leading-relaxed"
+    >
+      {slide.tagline}
+    </motion.p>
+
+    <motion.div
+      initial={{ y: 20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.4 }}
+      className="flex flex-wrap justify-center gap-4 md:gap-6 mb-16"
+    >
+      {slide.points.map((point, i) => (
+        <div key={i} className="flex items-center gap-3 bg-white/5 border border-white/10 px-6 py-3 rounded-full text-white font-bold tracking-wide text-sm md:text-base hover:bg-white/10 transition-colors cursor-default">
+          <Check className="text-accent" size={18} />
+          {point}
+        </div>
+      ))}
+    </motion.div>
+
+    <motion.a
+      href={slide.ctaLink || "#"}
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ delay: 0.6 }}
+      className="bg-accent text-white text-lg md:text-xl font-bold uppercase tracking-widest px-10 py-5 rounded-full shadow-[0_0_40px_rgba(220,38,38,0.4)] hover:shadow-[0_0_60px_rgba(220,38,38,0.6)] hover:bg-red-600 transition-all flex items-center gap-4 group border border-white/10"
+    >
+      {slide.ctaText}
+      <ArrowRight className="group-hover:translate-x-1 transition-transform" />
+    </motion.a>
   </div>
 );
 
@@ -459,12 +845,35 @@ function App() {
         return <GridSlide slide={slide} />;
       case 'checklist': return <ListSlide slide={{ ...slide, points: slide.checklist }} />;
       case 'feature': return <GridSlide slide={{ ...slide, items: slide.features }} />;
+      case 'ecosystem-flow': return <EcosystemFlowSlide slide={slide} />;
+      case 'final-cta': return <FinalCtaSlide slide={slide} />;
       case 'quote': return (
-        <div className="flex flex-col justify-center h-full max-w-5xl mx-auto text-center md:text-left">
-          <div className="text-4xl md:text-7xl font-heading font-black text-white leading-tight mb-8">"{slide.quote}"</div>
-          <div className="text-lg md:text-xl text-white/60 font-body leading-relaxed md:pl-8 md:border-l-4 border-accent">
+        <div className="flex flex-col justify-center items-center h-full max-w-4xl mx-auto text-center relative z-10 px-6">
+          {/* Subtle Ambient Glow */}
+          <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full pointer-events-none transform scale-50 opacity-50" />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="mb-10 relative"
+          >
+            {/* Refined Accent */}
+            <div className="w-12 h-1 bg-accent/80 mb-10 mx-auto rounded-full" />
+
+            <div className="text-3xl md:text-5xl lg:text-6xl font-bold font-heading text-white leading-tight tracking-tight">
+              "{slide.quote}"
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="text-lg md:text-xl text-white/50 font-body font-light max-w-2xl leading-relaxed"
+          >
             {slide.subtext}
-          </div>
+          </motion.div>
         </div>
       );
       default: return <ListSlide slide={slide} />;
