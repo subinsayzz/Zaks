@@ -205,7 +205,7 @@ export const slides = [
         items: [
             { title: "Smart Gym Website", value: "₹50,000", desc: "AI lead capture, smart pixel tracking & mobile-first design.", icon: Monitor },
             { title: "Google Profile Optimization", value: "₹15,000", desc: "Rank higher locally and get found by more members.", icon: Globe },
-            { title: "Offer Design & Launch", value: "₹40,000", desc: "High-ticket offer structuring, ad creatives & launch strategy.", icon: Rocket },
+            { title: "Offer Design & Launch", value: "₹40,000", desc: "High-ticket offer structuring & launch strategy.", icon: Rocket },
             { title: "Custom Automations", value: "₹60,000", desc: "Zero-touch lead nurture, payment recovery & retention flows.", icon: Zap },
             { title: "Digital SOP Playbooks", value: "PRICELESS", desc: "Sales & retention workflows documented. Custom-built after deep business analysis.", icon: FileText },
             { title: "Quarterly Growth Call", value: "₹25,000/qtr", desc: "Deep-dive strategy reviews & roadmap planning sessions.", icon: BarChart3 }
