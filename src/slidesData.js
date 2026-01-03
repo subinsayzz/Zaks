@@ -251,7 +251,7 @@ export const slides = [
             {
                 title: "Rule 2: Monthly Asset",
                 amount: "3X ROI",
-                desc: "No recurring fees until you make 3x PowerUp cost or ₹75k-₹1L extra monthly revenue."
+                desc: "No recurring fees until you make 3x PowerUp cost or ₹50k-₹1L extra monthly revenue."
             }
         ],
         icon: ShieldCheck
