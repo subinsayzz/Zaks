@@ -182,12 +182,12 @@ export const slides = [
         price: "₹2,79,000",
         priceSuffix: "+ GST",
         features: [
-            "Full System Setup",
-            "All Integrations & Migrations",
-            "No AMC (Annual Maintenance)",
-            "No Yearly Renewals",
-            "24/7 VIP support line",
-            "Priority Access: Gymrupt Growth Summit"
+            "Complete 'Done-For-You' System Installation",
+            "No Yearly Fees or AMC (One-Time Investment)",
+            "Staff Onboarding & Custom SOP Creation",
+            "Smart Hardware, ERP & Universal API Integrations",
+            "24/7 Priority Support",
+            "Unlimited Member & Staff Capacity"
         ],
         icon: CreditCard
     },
@@ -269,15 +269,6 @@ export const slides = [
         icon: Rocket
     },
     {
-        id: 17,
-        type: 'quote',
-        title: "WHY SCALE MATTERS",
-        subtitle: "THE FRANCHISE MINDSET",
-        quote: "People buy franchises for systems, not logos.",
-        subtext: "Buyers want predictable outcomes and no experimentation. Strong home-grown brands win when they have systems.",
-        icon: Flag
-    },
-    {
         id: 18,
         type: 'ecosystem-flow',
         title: "FUTURE-PROOF SYSTEM",
@@ -293,17 +284,43 @@ export const slides = [
         icon: Layers
     },
     {
+        id: 17,
+        type: 'quote',
+        title: "THE ENDGAME",
+        subtitle: "BUILDING AN ASSET",
+        quote: "We don't just manage operations. We engineer investable brands.",
+        subtext: "Our goal is to make your model franchise-ready. We are building an ecosystem where investors discover system-driven gyms, turning your brand into a scalable chain.",
+        icon: Flag
+    },
+    {
+        id: 20,
+        type: 'video-reveal',
+        title: "NEW YEAR SPECIAL",
+        subtitle: "FRONT DESK REVOLUTION",
+        mainIdea: "A dedicated front desk tablet to manage leads & attendance.",
+        videoThumbnail: "https://img.youtube.com/vi/9C7qoEPQzNA/maxresdefault.jpg",
+        videoLink: "https://youtu.be/9C7qoEPQzNA?si=rVTm1os04zkVBw7Q",
+        points: [
+            "Included Free",
+            "Streamline Member Onboarding",
+            "Manage Leads & Walk-ins",
+            "Smart Attendance Tracking"
+        ],
+        note: "Limited Time New Year Offer",
+        icon: Smartphone
+    },
+    {
         id: 19,
         type: 'final-cta',
-        title: "FINAL THOUGHTS",
-        subtitle: "BUILD TOMORROW",
-        tagline: "Most tools help manage today. Gymrupt helps build tomorrow.",
+        title: "THE DECISION",
+        subtitle: "SCALE OR STAGNATE",
+        tagline: "You can keep stitching generic tools together and hoping they work. Or you can install a proven growth engine and just drive.",
         points: [
-            "One System.",
-            "One Growth Partner.",
-            "Many Gyms."
+            "We Install The System.",
+            "We Guarantee The Results.",
+            "You Own The Asset."
         ],
-        ctaText: "Sign for Partnership",
+        ctaText: "LET'S BUILD AN EMPIRE",
         ctaLink: "#",
         icon: CheckCircle2
     }

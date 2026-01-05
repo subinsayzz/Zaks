@@ -774,7 +774,7 @@ const GridSlide = ({ slide }) => (
 // --- ECOSYSTEM FLOW SLIDE ---
 const EcosystemFlowSlide = ({ slide }) => (
   <div className="h-full w-full overflow-y-auto custom-scrollbar">
-    <div className="min-h-full flex flex-col justify-center p-4 md:p-8">
+    <div className="min-h-full flex flex-col px-4 md:px-8 pb-4 md:pb-8 pt-0">
       <div className="text-xl md:text-2xl font-light text-white/80 mb-8 text-center max-w-3xl mx-auto">{slide.mainIdea}</div>
 
       <div className="flex flex-col md:flex-row items-stretch gap-4 md:gap-12 relative mb-8">
@@ -920,6 +920,72 @@ const AddOnsSlide = ({ slide }) => (
   </div>
 );
 
+// --- VIDEO REVEAL SLIDE ---
+const VideoRevealSlide = ({ slide }) => (
+  <div className="grid md:grid-cols-2 gap-12 h-full items-center">
+    <div className="space-y-8">
+      <div>
+        <div className="inline-block px-3 py-1 bg-accent/20 border border-accent/40 rounded-full text-accent text-xs font-bold uppercase tracking-widest mb-4">
+          Limited Time Offer
+        </div>
+        <h2 className="text-4xl md:text-5xl font-black font-heading text-white leading-tight">
+          {slide.mainIdea}
+        </h2>
+      </div>
+
+      <ul className="space-y-4">
+        {slide.points.map((point, i) => (
+          <motion.li
+            key={i}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 + (i * 0.1) }}
+            className="flex items-center gap-3 text-lg text-white/80"
+          >
+            <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white shadow-lg shadow-accent/20">
+              <Check size={14} strokeWidth={3} />
+            </div>
+            {point}
+          </motion.li>
+        ))}
+      </ul>
+
+      {slide.note && (
+        <div className="p-4 bg-white/5 border-l-4 border-accent rounded-r-xl text-white/50 text-sm italic">
+          "{slide.note}"
+        </div>
+      )}
+    </div>
+
+    <motion.div
+      initial={{ scale: 0.9, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      className="relative group rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-black aspect-video flex items-center justify-center"
+    >
+      <div className="absolute inset-0 bg-accent/20 blur-[100px] opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+      {/* Thumbnail Image */}
+      <img
+        src={slide.videoThumbnail}
+        alt="Video Thumbnail"
+        className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 scale-105 group-hover:scale-110 transform"
+      />
+
+      {/* Play Button Overlay */}
+      <a
+        href={slide.videoLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 flex items-center justify-center bg-black/40 group-hover:bg-black/20 transition-colors"
+      >
+        <div className="w-20 h-20 rounded-full bg-accent text-white flex items-center justify-center shadow-[0_0_40px_rgba(220,38,38,0.5)] group-hover:scale-110 transition-transform duration-300">
+          <div className="ml-1 w-0 h-0 border-t-[10px] border-t-transparent border-l-[18px] border-l-white border-b-[10px] border-b-transparent" />
+        </div>
+      </a>
+    </motion.div>
+  </div>
+);
+
 // --- FINAL CTA SLIDE ---
 const FinalCtaSlide = ({ slide }) => (
   <div className="flex flex-col items-center justify-center h-full text-center relative z-10">
@@ -1028,33 +1094,58 @@ function App() {
       case 'ecosystem-flow': return <EcosystemFlowSlide slide={slide} />;
       case 'interactive-tabs': return <InteractiveTabsSlide slide={slide} />;
       case 'addons': return <AddOnsSlide slide={slide} />;
+      case 'video-reveal': return <VideoRevealSlide slide={slide} />;
       case 'final-cta': return <FinalCtaSlide slide={slide} />;
       case 'quote': return (
-        <div className="flex flex-col justify-center items-center h-full max-w-4xl mx-auto text-center relative z-10 px-6">
-          {/* Subtle Ambient Glow */}
-          <div className="absolute inset-0 bg-accent/5 blur-[100px] rounded-full pointer-events-none transform scale-50 opacity-50" />
+        <div className="flex flex-col justify-center items-center h-full max-w-6xl mx-auto text-center relative z-10 px-6">
+          {/* Engineering/Blueprint Background Effect */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+            <div className="w-full h-full" style={{ backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-b from-bg via-transparent to-bg pointer-events-none" />
 
+          {/* Glowing Icon */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-10 relative"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, type: "spring" }}
+            className="mb-12 relative"
           >
-            {/* Refined Accent */}
-            <div className="w-12 h-1 bg-accent/80 mb-10 mx-auto rounded-full" />
-
-            <div className="text-3xl md:text-5xl lg:text-6xl font-bold font-heading text-white leading-tight tracking-tight">
-              "{slide.quote}"
+            <div className="absolute inset-0 bg-accent/20 blur-[80px] rounded-full" />
+            <div className="w-24 h-24 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent relative z-10 shadow-2xl">
+              {slide.icon ? <slide.icon size={48} /> : <Flag size={48} />}
             </div>
           </motion.div>
 
+          {/* The Quote */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
-            className="text-lg md:text-xl text-white/50 font-body font-light max-w-2xl leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-16 relative w-full"
           >
-            {slide.subtext}
+            {/* Giant Quote Marks behind */}
+            <div className="absolute -top-10 left-[10%] text-white/5 font-serif text-[12rem] leading-none -translate-y-1/2 select-none">“</div>
+
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-br from-white via-white to-white/50 leading-[1.05] tracking-tight relative z-10 drop-shadow-sm max-w-5xl mx-auto">
+              {slide.quote}
+            </h2>
+          </motion.div>
+
+          {/* The Vision/Subtext */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="relative max-w-4xl mx-auto"
+          >
+            <div className="absolute -inset-1 bg-gradient-to-r from-transparent via-accent/30 to-transparent blur-lg opacity-50" />
+            <div className="bg-zinc-900/50 backdrop-blur-md border border-white/10 rounded-2xl p-8 md:p-12 relative z-10">
+              <div className="text-accent font-bold tracking-[0.3em] uppercase text-xs mb-4">The Vision</div>
+              <p className="text-lg md:text-2xl text-white/90 font-body font-light leading-relaxed">
+                {slide.subtext}
+              </p>
+            </div>
           </motion.div>
         </div>
       );
