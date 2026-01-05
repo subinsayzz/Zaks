@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, ChevronLeft, ArrowRight, Check, X, Plus, Lock, Rocket, ShieldCheck, TrendingUp, Zap, Dumbbell, Layers } from 'lucide-react';
 import { slides } from './slidesData';
 import MobileAppMockup from './MobileAppMockup';
+import ScaleTrapSlide from './components/ScaleTrapSlide';
+import SystemFeaturesSlide from './components/SystemFeaturesSlide';
+import InteractiveTabsSlide from './components/InteractiveTabsSlide';
+import GrowthPartnerSlide from './components/GrowthPartnerSlide';
 import './index.css';
 
 // --- ANIMATION VARIANTS ---
@@ -470,6 +474,29 @@ const GuaranteeSlide = ({ slide }) => (
       ))}
     </div>
 
+    {slide.finePrint && (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="mt-6 mx-auto max-w-3xl w-full"
+      >
+        <div className="bg-[#1a1a1a] border border-white/10 rounded-xl p-4 md:p-5 shadow-lg">
+          <div className="text-white/30 text-[10px] font-bold uppercase tracking-widest mb-3 border-b border-white/5 pb-2">
+            {slide.finePrint[0]}
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 text-[10px] md:text-xs text-zinc-400 font-medium leading-relaxed">
+            {slide.finePrint.slice(1).map((text, i) => (
+              <div key={i} className="relative pl-3">
+                <div className="absolute left-0 top-1.5 w-1 h-1 rounded-full bg-accent/50" />
+                <span>{text.replace(/^• /, '')}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
+    )}
+
     <div className="mt-8 text-center bg-white/5 p-4 rounded-xl border border-white/5 inline-block mx-auto">
       <div className="inline-flex items-center gap-2 text-white/60 font-bold uppercase tracking-widest text-xs">
         <ShieldCheck size={16} className="text-accent" /> 100% Risk-Free Partnership Guarantee
@@ -643,9 +670,11 @@ const GridSlide = ({ slide }) => (
           className="p-6 bg-white/5 border border-white/10 rounded-xl flex flex-col gap-3 hover:border-accent/40 hover:bg-white/10 transition-all group"
         >
           <div className="flex justify-between items-start">
-            <div className="text-white/40 text-xs uppercase tracking-wider font-bold">
-              {item.tag ? item.tag : (slide.type === 'powerups' ? 'Add-on' : 'System-Included')}
-            </div>
+            {(item.tag || slide.type === 'powerups' || slide.id !== 11) && (
+              <div className="text-white/40 text-xs uppercase tracking-wider font-bold">
+                {item.tag ? item.tag : (slide.type === 'powerups' ? 'Add-on' : 'System-Included')}
+              </div>
+            )}
             {item.icon && <item.icon className="text-accent opacity-50 group-hover:opacity-100 transition-opacity" size={20} />}
           </div>
 
@@ -654,8 +683,17 @@ const GridSlide = ({ slide }) => (
           {item.desc && <div className="text-white/60 text-sm leading-relaxed">{item.desc}</div>}
 
           {item.value && (
-            <div className="text-accent text-2xl font-mono font-bold mt-auto pt-4 border-t border-white/5">
-              {item.value}
+            <div className="mt-auto pt-4 border-t border-white/5">
+              {slide.id === 11 && item.value !== 'PRICELESS' ? (
+                <div className="relative inline-block">
+                  <span className="text-accent text-2xl font-mono font-bold opacity-50">{item.value}</span>
+                  <div className="absolute top-1/2 left-0 w-full h-[3px] bg-rose-500 -rotate-12 transform scale-110 opacity-80" />
+                </div>
+              ) : (
+                <div className="text-accent text-2xl font-mono font-bold">
+                  {item.value}
+                </div>
+              )}
             </div>
           )}
         </motion.div>
@@ -668,7 +706,33 @@ const GridSlide = ({ slide }) => (
       </div>
     )}
 
-    {slide.limitedOffer && (
+    {/* Multiple Limited Offers */}
+    {slide.limitedOffers && (
+      <div className="mt-4 grid md:grid-cols-2 gap-4">
+        {slide.limitedOffers.map((offer, i) => (
+          <div key={i} className="p-4 rounded-xl border-2 border-dashed border-amber-500/30 bg-amber-500/5 flex flex-col justify-between gap-4">
+            <div>
+              <div className="text-amber-500 text-xs font-bold uppercase tracking-wider mb-1">{offer.tag}</div>
+              <div className="text-white font-heading font-bold text-lg leading-tight">{offer.title}</div>
+              <div className="text-white/60 text-xs md:text-sm mt-2 leading-relaxed">{offer.desc}</div>
+            </div>
+            <div className="text-right border-t border-amber-500/20 pt-3 mt-auto">
+              {slide.id === 11 ? (
+                <div className="relative inline-block">
+                  <span className="text-amber-500 font-mono font-bold text-xl opacity-50">{offer.value}</span>
+                  <div className="absolute top-1/2 left-0 w-full h-[3px] bg-rose-500 -rotate-12 transform scale-110 opacity-80" />
+                </div>
+              ) : (
+                <div className="text-amber-500 font-mono font-bold text-xl">{offer.value}</div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    )}
+
+    {/* Single Limited Offer (Legacy Support) */}
+    {slide.limitedOffer && !slide.limitedOffers && (
       <div className="mt-4 p-4 rounded-xl border-2 border-dashed border-amber-500/30 bg-amber-500/5 flex items-center justify-between gap-4">
         <div>
           <div className="text-amber-500 text-xs font-bold uppercase tracking-wider mb-1">{slide.limitedOffer.tag}</div>
@@ -676,7 +740,14 @@ const GridSlide = ({ slide }) => (
           <div className="text-white/60 text-sm mt-1">{slide.limitedOffer.desc}</div>
         </div>
         <div className="text-right">
-          <div className="text-amber-500 font-mono font-bold text-xl">{slide.limitedOffer.value}</div>
+          {slide.id === 11 ? (
+            <div className="relative inline-block">
+              <span className="text-amber-500 font-mono font-bold text-xl opacity-50">{slide.limitedOffer.value}</span>
+              <div className="absolute top-1/2 left-0 w-full h-[3px] bg-rose-500 -rotate-12 transform scale-110 opacity-80" />
+            </div>
+          ) : (
+            <div className="text-amber-500 font-mono font-bold text-xl">{slide.limitedOffer.value}</div>
+          )}
         </div>
       </div>
     )}
@@ -940,7 +1011,9 @@ function App() {
   const renderContent = () => {
     switch (slide.type) {
       case 'title': return <TitleSlide slide={slide} />;
+      case 'scale-trap': return <ScaleTrapSlide data={slide} />;
       case 'list': return <ListSlide slide={slide} />;
+      case 'growth-partner': return <GrowthPartnerSlide slide={slide} />;
       case 'comparison': return <ComparisonSlide slide={slide} />;
       case 'pricing': return <PricingSlide slide={slide} />;
       case 'guarantee': return <GuaranteeSlide slide={slide} />;
@@ -950,8 +1023,10 @@ function App() {
       case 'powerups':
         return <GridSlide slide={slide} />;
       case 'checklist': return <ListSlide slide={{ ...slide, points: slide.checklist }} />;
+      case 'system-features': return <SystemFeaturesSlide slide={slide} />;
       case 'feature': return <GridSlide slide={{ ...slide, items: slide.features }} />;
       case 'ecosystem-flow': return <EcosystemFlowSlide slide={slide} />;
+      case 'interactive-tabs': return <InteractiveTabsSlide slide={slide} />;
       case 'addons': return <AddOnsSlide slide={slide} />;
       case 'final-cta': return <FinalCtaSlide slide={slide} />;
       case 'quote': return (

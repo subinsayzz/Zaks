@@ -21,88 +21,14 @@ export const slides = [
     },
     {
         id: 2,
-        type: 'comparison',
-        title: "WHY GROWTH STARTS FEELING HEAVY",
-        subtitle: "THE SCALE PROBLEM",
-        mainIdea: "Running one gym is manageable. Scaling is where systems start breaking.",
-        col1Title: "In Most Independent Gyms",
-        col1: [
-            "Trainers coach clients & handle enquiries",
-            "Peak hours mean phones go unanswered",
-            "Over 70% of calls drop when busy",
-            "That’s not bad staff. That’s lost revenue."
-        ],
-        col2Title: "As Teams Grow",
-        col2: [
-            "Owners get pulled back into firefighting",
-            "Consistency drops instantly",
-            "Growth depends on people, not processes",
-            "Most gyms don’t fail. They plateau."
-        ],
-        conclusion: `This is a SYSTEM problem — not a motivation problem.
-        
-        You might think the answer is “better software.”
-        But as we’ll see, most tools only measure the problem —
-        fixing it still depends on people.`,
+        type: 'scale-trap',
+        title: "THE SCALE TRAP",
+        subtitle: "OLD WAY VS. NEW WAY",
         icon: TrendingUp
     },
     {
-        id: 3,
-        type: 'comparison',
-        title: "WHY SOFTWARE DOESN'T FIX IT",
-        subtitle: "ACTIVITY VS ACTION",
-        mainIdea: "Most gym software is designed to show activity — not to create action.",
-        col1Title: "What most tools show (Passive)",
-        col1: ["CRM data", "Billing records", "Attendance logs", "Reports & dashboards"],
-        col1Footer: "Useful for visibility.\nUseless without follow-through.",
-        col2Title: "What’s missing (Active)",
-        col2: [
-            "Smart Lead Capture (Social DMs, WhatsApp, Website)",
-            "Clear staff guidance",
-            "Consistent sales process (No guesswork)",
-            "Proper nurture system",
-            "Proper onboarding system (For maximum retention)",
-            "Automatic follow-ups"
-        ],
-        conclusion: `When software doesn’t act, people fill the gap.
-        
-        Manual effort fills the gap.
-        Manual effort doesn’t scale.`,
-        icon: Layers
-    },
-    {
-        id: 4,
-        type: 'list',
-        title: "THE REAL BOTTLENECK",
-        subtitle: "STAFF & CONSISTENCY",
-        mainIdea: "When software doesn’t act, people become the system. And that’s where growth slows.",
-        points: [
-            "Sales & Service depend on 'good staff', not systems",
-            "Performance drops overnight when staff leave",
-            "Knowledge lives in people, not processes",
-            "Results: Inconsistent, hard to repeat, impossible to scale"
-        ],
-        footer: "Chains don’t scale people. They scale systems.",
-        icon: Users
-    },
-    {
-        id: 5,
-        type: 'list',
-        title: "WHAT BIG CHAINS DO DIFFERENTLY",
-        subtitle: "SYSTEMS OVER SCALE",
-        mainIdea: "Big chains don’t rely on exceptional people. They rely on exceptionally clear systems.",
-        points: [
-            "Standardised onboarding & sales flows (Every time)",
-            "Automated follow-ups & retention logic (Nothing slips)",
-            "Unified reporting — one version of truth",
-            "People can change. Performance doesn’t."
-        ],
-        footer: "The system runs the gym. People run the system.",
-        icon: LayoutGrid
-    },
-    {
         id: 6,
-        type: 'feature',
+        type: 'system-features',
         title: "WHAT GYMRUPT ACTUALLY IS",
         subtitle: "NOT JUST A TOOL",
         mainIdea: "Gymrupt is not another gym app. It is a gym operating system.",
@@ -115,27 +41,11 @@ export const slides = [
             { title: "Smart Website & Funnel Builder", desc: "High-converting pages that capture every visitor" },
             { title: "Relentless Follow-Up", desc: "Automated WhatsApp persistence that converts" },
             { title: "Franchise-Level Logic", desc: "Sophisticated retention systems on autopilot" },
-            { title: "Built to Scale", desc: "A system that runs the gym, so you don't have to" }
+            { title: "All-in-One Ads Manager", desc: "Launch & optimize high-performing ads directly from your dashboard" }
         ],
+        quote: "A system that runs the gym, so you don't have to.",
         mantra: "You don’t manage Gymrupt. Gymrupt manages your growth.",
         icon: Zap
-    },
-    {
-        id: 7,
-        type: 'app-showcase',
-        title: "YOUR OWN BRANDED GYM APP",
-        subtitle: "BUILT FOR YOUR GYM. POWERED BY GYMRUPT.",
-        mainIdea: "This is not a generic fitness app. It’s a custom-built extension of your gym.",
-        features: [
-            { icon: Zap, title: "Fully branded", desc: "Your logo, colours, and identity — across all locations" },
-            { icon: Smartphone, title: "Member self-service", desc: "Memberships, attendance, payments, programs — without front-desk dependency" },
-            { icon: MessageCircle, title: "Smart communication", desc: "Updates, reminders, follow-ups — delivered automatically" },
-            { icon: Layers, title: "Deep Gymrupt integration", desc: "Sales, onboarding, retention, and payments stay in sync" },
-            { icon: Users, title: "Zero per-user fees", desc: "No penalties as your member base grows" },
-            { icon: Lock, title: "Centralised control", desc: "One app. One system. Used across every location" }
-        ],
-        note: "Premium Add-on: Custom app development is available as an exclusive additional service.",
-        icon: Smartphone
     },
     {
         id: 8,
@@ -165,58 +75,102 @@ export const slides = [
         icon: Puzzle
     },
     {
-        id: 9,
-        type: 'list',
-        title: "INSTALLATION, NOT SUPPORT",
-        subtitle: "GYMRUPT AS A GROWTH PARTNER",
-        mainIdea: "We don’t sell software. We install the system.",
-        points: [
-            "We design your core money offer",
-            "We build smart onboarding journeys",
-            "We create automation workflows that actually run",
-            "We install retention logic before members drop",
-            "We reduce owner dependency over time"
+        id: 7,
+        type: 'interactive-tabs',
+        title: "EXPERIENCE THE ECOSYSTEM",
+        subtitle: "INTERACTIVE DEMOS",
+        mainIdea: "Explore the core pillars of the Gymrupt partnership experience.",
+        tabs: [
+            {
+                id: 'website',
+                label: 'Smart Website',
+                icon: Monitor,
+                content: {
+                    type: 'split-preview',
+                    componentName: 'WebsiteMockup',
+                    title: "CONVERSION ENGINE",
+                    desc: "Most gym websites are just digital brochures. Ours is a 24/7 sales team designed to capture leads.",
+                    features: [
+                        "Smart Lead Tracking & AI Captures the lead 24/7",
+                        "Ad Precision: Track every lead source (Meta/Google)",
+                        "Instant Conversion: Auto-booking engine built-in"
+                    ],
+                    value: "Included (Bonus)"
+                }
+            },
+            {
+                id: 'app',
+                label: 'Custom App',
+                icon: Smartphone,
+                content: {
+                    type: 'split-preview',
+                    componentName: 'MobileAppMockup',
+                    title: "YOUR GYM IN POCKET",
+                    desc: "A world-class mobile experience that keeps your members addicted to their progress.",
+                    features: [
+                        "Seamless Booking: Classes, PT, and events",
+                        "Workout Tracking: Replace paper logs forever",
+                        "Gamification: Leaderboards & achievement badges"
+                    ],
+                    value: "Custom Build"
+                }
+            },
+            {
+                id: 'tour',
+                label: '360° Tour',
+                icon: Globe,
+                content: {
+                    type: 'split-preview',
+                    componentName: 'TourEmbed',
+                    embedUrl: 'https://www.google.com/maps/embed?pb=!4v1766911809186!6m8!1m7!1sCAoSK0FGMVFpcE5PVlUydHBVSUJFYWlGSmh2OE5PYW1iaDk5dl9fN3d6amw2bTQ.!2m2!1d28.52171372208289!2d77.21604902752712!3f10.71!4f-8.269999999999996!5f0.4000000000000002',
+                    title: "IMMERSIVE TRUST",
+                    desc: "Trust is built when they can see where they're going to train.",
+                    features: [
+                        "Google Maps Integration: Appear in search results",
+                        "High Conversion: Increase bookings by 85%",
+                        "2 Locations Included: Professionally shot"
+                    ],
+                    value: "Included (Bonus)"
+                }
+            }
         ],
-        highlight: "This isn’t tech support. This is system ownership.",
-        footer: "You don’t figure it out. We build it with you.",
-        icon: Handshake
+        icon: Smartphone
     },
     {
-        id: 10,
-        type: 'checklist',
-        title: "DEFINITION OF SUCCESS",
-        subtitle: "WHAT A “WORKING SYSTEM” LOOKS LIKE",
-        mainIdea: "We don’t keep this vague. A system is considered working when:",
-        checklist: [
-            "One paid offer live with 10+ payments in 30 days",
-            "Leads → follow-ups → payments run without owner chasing",
-            "Staff follows clear processes",
-            "Performance survives staff changes"
-        ],
-        highlight: "At this point: The system is predictable. The results are repeatable. The setup is copy-ready.",
-        footer: "If it works once, it’s luck. If it works without you, it’s a system.",
-        icon: CheckCircle2
+        id: 9,
+        type: 'growth-partner',
+        title: "GYMRUPT GROWTH PARTNER",
+        subtitle: "INSTALLATION & SUCCESS",
+        icon: Handshake
     },
     {
         id: 11,
         type: 'grid-cards',
         title: "SYSTEM ESSENTIALS",
-        subtitle: "INCLUDED TO ENSURE IT WORKS",
+        subtitle: "EXCLUSIVE PARTNERSHIP BONUSES",
         items: [
             { title: "Smart Gym Website", value: "₹50,000", desc: "AI lead capture, smart pixel tracking & mobile-first design.", icon: Monitor },
             { title: "Google Profile Optimization", value: "₹15,000", desc: "Rank higher locally and get found by more members.", icon: Globe },
             { title: "Offer Design & Launch", value: "₹40,000", desc: "High-ticket offer structuring & launch strategy.", icon: Rocket },
             { title: "Custom Automations", value: "₹60,000", desc: "Zero-touch lead nurture, payment recovery & retention flows.", icon: Zap },
-            { title: "Digital SOP Playbooks", value: "PRICELESS", desc: "Sales & retention workflows documented. Custom-built after deep business analysis.", icon: FileText },
-            { title: "Quarterly Growth Call", value: "₹25,000/qtr", desc: "Deep-dive strategy reviews & roadmap planning sessions.", icon: BarChart3 }
+            { title: "Social Media Revenue Sprint", value: "₹1,20,000", desc: "Campaigns designed to recover your fee. (Ends on recovery, max 90 days).", icon: TrendingUp },
+            { title: "Quarterly Growth Call", value: "PRICELESS", desc: "Deep-dive strategy reviews & roadmap planning sessions.", icon: BarChart3 }
         ],
-        highlight: "TOTAL VALUE: ₹2,58,000+ (Included with Partnership)",
-        limitedOffer: {
-            title: "Bonus: 360° Virtual Tour",
-            value: "₹48,000",
-            desc: "2 Locations (@ ₹24k ea). Google verified immersive views. (Subject to slot availability)",
-            tag: "Limited Slot Offer"
-        },
+        highlight: "TOTAL VALUE: ₹8,13,000+ (Included with Partnership)",
+        limitedOffers: [
+            {
+                title: "Bonus: 360° Virtual Tour",
+                value: "₹48,000",
+                desc: "2 Locations (@ ₹24k ea). Google verified immersive views. (Subject to slot availability)",
+                tag: "Limited Slot Offer"
+            },
+            {
+                title: "Branded App powered by Gymrupt",
+                value: "₹4.8 Lakhs",
+                desc: "Custom UI & features. Investing in our shared vision for market dominance.",
+                tag: "Limited Only for Zak's Gym Master"
+            }
+        ],
         note: "Critical infrastructure. Not optional bonuses.",
         icon: ShieldCheck
     },
@@ -225,7 +179,7 @@ export const slides = [
         type: 'pricing',
         title: "GROWTH PARTNERSHIP FEES",
         subtitle: "INVESTMENT",
-        price: "₹2,10,000",
+        price: "₹2,79,000",
         priceSuffix: "+ GST",
         features: [
             "Full System Setup",
@@ -244,15 +198,21 @@ export const slides = [
         subtitle: "RISK-FREE PARTNERSHIP",
         rules: [
             {
-                title: "Rule 1: Recovery First",
-                amount: "₹2,10,000",
-                desc: "Recovered via memberships, PT, or challenges before we discuss further costs."
+                title: "Revenue Recovery Bridge",
+                amount: "90 Days",
+                desc: "We actively run launch campaigns & offer-based creatives until your fee is recovered."
             },
             {
                 title: "Rule 2: Monthly Asset",
                 amount: "3X ROI",
                 desc: "No recurring fees until you make 3x PowerUp cost or ₹50k-₹1L extra monthly revenue."
             }
+        ],
+        finePrint: [
+            "CONDITIONS & SCOPE:",
+            "• Campaign runs for up to 90 days or until fee recovery.",
+            "• Focused on offers, launches, and local visibility (not generic posting).",
+            "• Gym must run designed offers & respond to leads within SLA."
         ],
         icon: ShieldCheck
     },
@@ -286,9 +246,9 @@ export const slides = [
         title: "OPTIONAL UPGRADES",
         subtitle: "SCALE FASTER",
         items: [
-            { title: "Meta Ads Management", price: "₹25k - ₹40k / mo", desc: "Complete 'Done-For-You' ad strategy, creative & optimization.", icon: Megaphone },
+            { title: "Social Media Campaigns", price: "Included*", desc: "Included until fee recovery (max 90 days). Available as a paid add-on later.", icon: Megaphone },
             { title: "Speed-to-Lead Service", price: "Custom Quote", desc: "Dedicated team to call leads within 5 minutes.", icon: PhoneCall },
-            { title: "Custom App Build", price: "Custom Quote", desc: "Fully branded iOS & Android app for your gym.", icon: Smartphone },
+            { title: "Custom App Build", price: "Included", desc: "Exclusive custom developement only for Zak's Gym Master. Fully branded iOS & Android.", icon: Smartphone },
             { title: "360 Gym ERP Setup", price: "Custom Quote", desc: "End-to-end ERP implementation for multi-location scaling.", icon: Layers }
         ],
         icon: Puzzle
@@ -299,10 +259,10 @@ export const slides = [
         title: "FUTURE ECOSYSTEM ACCESS",
         subtitle: "FIRST MOVER ADVANTAGE",
         items: [
-            { title: "Smart Vending Machines", value: "EARLY ACCESS", desc: "Both for high protein munchies & shakes - increases retention.", icon: Zap },
-            { title: "On-Demand Merchandise", value: "EARLY ACCESS", desc: "Zero-inventory branding. Dropshipped to members.", icon: Smartphone },
-            { title: "Vertical Product Integrations", value: "EARLY ACCESS", desc: "Unified ecosystem for hardware, access, and retail.", icon: Layers },
-            { title: "Workout Discovery Platform", value: "COMING SOON", desc: "Get discovered with our workout discovery platform.", icon: Globe }
+            { title: "Smart Vending Machines", value: "EARLY ACCESS", desc: "Both for high protein munchies & shakes - increases retention.", icon: Zap, tag: "Future Innovation" },
+            { title: "On-Demand Merchandise", value: "EARLY ACCESS", desc: "Zero-inventory branding. Dropshipped to members.", icon: Smartphone, tag: "Future Innovation" },
+            { title: "Smart Kiosk & Integrations", value: "EARLY ACCESS", desc: "Floor screens to assist workouts, display ads & act as POS.", icon: Layers, tag: "Future Innovation" },
+            { title: "Workout Discovery Platform", value: "COMING SOON", desc: "Get discovered with our workout discovery platform.", icon: Globe, tag: "Future Innovation" }
         ],
         highlight: "Gymrupt partners get priority access to physical & retail innovations.",
         note: "Be the first to deploy next-gen gym tech.",
